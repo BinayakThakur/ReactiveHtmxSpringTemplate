@@ -6,13 +6,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import reactor.core.publisher.Flux;
-import reactor.core.publisher.FluxSink;
 import reactor.core.publisher.Sinks;
 
-import java.util.function.Consumer;
+import java.util.Arrays;
 
 
-@Slf4j
 public abstract class WebpageHandler extends Brush {
     private static final Logger log = LoggerFactory.getLogger(WebpageHandler.class);
     //Using sink
@@ -27,8 +25,9 @@ public abstract class WebpageHandler extends Brush {
 
     }
 
-
-
+    public void add(NodeCreator... nodeCreatorMulti) {
+        Arrays.stream(nodeCreatorMulti).forEach(nodes::tryEmitNext);
+    }
     public void add(NodeCreator nodeCreator) {
         nodes.tryEmitNext(nodeCreator);
     }

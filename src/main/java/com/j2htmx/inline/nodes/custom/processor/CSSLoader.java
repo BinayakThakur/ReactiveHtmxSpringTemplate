@@ -15,9 +15,9 @@ public class CSSLoader {
 		}
 	}
 	public void load() throws FileNotFoundException, IOException {
-//		this.props=new Properties();
-//		props.load(new FileInputStream("/Canvas/css.properties"));
-//
+		this.props=new Properties();
+		props.load(new FileInputStream("css.properties"));
+
 	}
 	public String getProperty(String key) {
 			return props.getProperty(key);
