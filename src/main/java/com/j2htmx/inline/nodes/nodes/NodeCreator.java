@@ -11,6 +11,7 @@ import java.util.List;
 @Setter
 public class NodeCreator extends CSSLoader {
 	String Tag="";
+	String classStyle = "";
 	String content="";
 	String layout="";
 	String styleID="";
@@ -21,6 +22,7 @@ public class NodeCreator extends CSSLoader {
 	String hxTarget = "";
 	String width = "";
 	String height = "";
+	String id = "";
 	List<String> addedStyles = new ArrayList<>();
 
 	@Override
@@ -51,10 +53,26 @@ public class NodeCreator extends CSSLoader {
 		if(href.length()>0) {
 			return "<"+this.Tag+style+" "+"href ="+href+">"+ this.content   + "</"+this.Tag+">";
 		}
-		return "<"+this.Tag+style+width+height+hxPost+hxTarget+" >"+ this.content   + "</"+this.Tag+">";
+		return "<"+this.Tag+classStyle+style+id+width+height+hxPost+hxTarget+" >"+ this.content   + "</"+this.Tag+">";
 	}
 	public void setTag(String tag) {
 			this.Tag=tag;
+	}
+
+	public void setContent(NodeCreator... nodeCreators){
+		String node = "";
+		for (NodeCreator nodeCreator : nodeCreators) {
+			node.concat(nodeCreator.createPairNode());
+		}
+		this.content = node;
+	}
+
+	public void addContent(NodeCreator... nodeCreators){
+		String node = "";
+		for (NodeCreator nodeCreator : nodeCreators) {
+			node.concat(nodeCreator.createPairNode());
+		}
+		this.content = this.content.concat(node);
 	}
 
 	public void setContent(String content) {
@@ -75,6 +93,11 @@ public class NodeCreator extends CSSLoader {
 		this.style=" style=' "+getProperty(styleClass)+"' ";
 		addedStyles.add(getProperty(styleClass));
 	}
+
+	public void setClass(String styleClass) {
+		this.classStyle=" class=' "+styleClass+"' ";
+	}
+
 	public void addStyle(String styleClass) {
 		addedStyles.add(getProperty(styleClass));
 		String styleAdded = addedStyles.stream().reduce("", (a,b)->a+" "+b);
@@ -85,6 +108,9 @@ public class NodeCreator extends CSSLoader {
 	}
 	public void setHeight(String height) {
 		this.height=" width = ".concat(height);
+	}
+	public void setId(String id) {
+		this.id = " id='"+id+"'";
 	}
 	
 }

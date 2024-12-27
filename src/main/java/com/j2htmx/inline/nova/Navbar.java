@@ -11,15 +11,15 @@ public class Navbar extends NodeCreator {
         setTag("nav");
         setStyle("navbar");
 
-        Button home = new Button("Home", UUID.randomUUID().toString());
-        home.setStyle("button");
+        Button home = new Button("Watchlist", UUID.randomUUID().toString());
+        home.setStyle("button-warning");
 
-        Button about = new Button("Cart", UUID.randomUUID().toString());
-        about.setStyle("button");
+        Button about = new Button("Trends", UUID.randomUUID().toString());
+        about.setStyle("button-dark");
 
 
-        Button content = new Button("Profile", UUID.randomUUID().toString());
-        content.setStyle("button");
+        Button content = new Button("Events", UUID.randomUUID().toString());
+        content.setStyle("button-primary");
 
 
         setContent(home.createPairNode().concat(about.createPairNode()).concat(content.createPairNode()));

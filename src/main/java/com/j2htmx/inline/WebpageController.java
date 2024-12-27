@@ -17,4 +17,19 @@ public class WebpageController {
         return webpage.createHome(UUID.randomUUID().toString());
     }
 
+    @GetMapping("/dairy")
+    public Flux<String> dairy() {
+        return webpage.createDairy();
+    }
+
+    @GetMapping("/vegetable")
+    public Flux<String> vegetable() {
+        return webpage.createVegetable();
+    }
+
+    @GetMapping("/snack")
+    public Flux<String> snack() {
+        return webpage.createSnacks();
+    }
+
 }
