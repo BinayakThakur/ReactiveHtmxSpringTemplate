@@ -3,17 +3,18 @@ package com.j2htmx.inline.nova;
 import com.j2htmx.inline.nodes.nodes.NodeCreator;
 import com.j2htmx.inline.nodes.standard.form.Button;
 import com.j2htmx.inline.nodes.standard.form.Div;
+import com.j2htmx.inline.repository.ThemeRepository;
 import org.springframework.util.StringUtils;
 
 import java.util.UUID;
 
 
 public class Card extends NodeCreator {
-
+    ThemeRepository themeRepository = new ThemeRepository();
     public Card() {
         setTag("div");
         Div div = new Div();
-
+        setClass(themeRepository.getTheme());
         div.setContent(header().createPairNode().concat(content().createPairNode()).concat(execute(UUID.randomUUID().toString()).createPairNode()).concat(execute(UUID.randomUUID().toString()).createPairNode()));
         setContent(div.createPairNode());
     }
@@ -21,8 +22,8 @@ public class Card extends NodeCreator {
     public void init(String header, String content, String buttonContent) {
         setTag("div");
         Div div = new Div();
-        setStyle("button-success");
-        Button button = new Button("Add to cart", UUID.randomUUID().toString());
+        div.setStyle("wrapbox");
+        Button button = new Button("Report", UUID.randomUUID().toString());
         button.setStyle("button-secondary");
         div.setContent(header(header).createPairNode().concat(content(content).createPairNode()).concat(execute(UUID.randomUUID().toString(), buttonContent).createPairNode().concat(button.createPairNode())));
         setContent(div.createPairNode());
